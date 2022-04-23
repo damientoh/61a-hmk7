@@ -37,7 +37,11 @@
 )
 
 (define (add-to-kwlist kwlist key value)
-  'YOUR-CODE-HERE)
+  (if (> (length kwlist) 2)
+  (append kwlist (cons (cons key (cons value nil)) nil))
+  (cons (append (car kwlist) (cons key nil)) (cons (append (cadr kwlist) (cons value nil)) nil))
+  )
+)
 
 (define (get-first-from-kwlist kwlist key)
   'YOUR-CODE-HERE)
