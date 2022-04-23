@@ -47,10 +47,27 @@
   'YOUR-CODE-HERE)
 
 (define (prune-expr expr)
-  (define (prune-helper lst) 'YOUR-CODE-HERE)
-  'YOUR-CODE-HERE)
+  (define (prune-helper lst)
+    (cond
+      ((null? lst) nil)
+      ((= (length lst) 1) (cons (car lst) nil))
+      (else (cons (car lst) (prune-helper (cdr (cdr lst)))))
+    )
+  )
+  (cons (car expr) (prune-helper (cdr expr)))
+)
 
-(define (curry-cook formals body) 'YOUR-CODE-HERE)
+(define (curry-cook formals body)
+  (cond
+    ((= (length formals) 1) (cons 'lambda (cons formals (cons body nil))))
+    (else (cons 'lambda (cons (cons (car formals) nil) (cons (curry-cook (cdr formals) body) nil))))
+  )
+
+)
 
 (define (curry-consume curries args)
-  'YOUR-CODE-HERE)
+  (cond
+    ((null? args) curries)
+    (else (curry-consume (curries (car args)) (cdr args)))
+  )
+)
